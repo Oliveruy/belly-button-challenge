@@ -50,10 +50,10 @@ function buildCharts(sample) {
     };
 
     const bubbleLayout = {
-      title: 'OTU ID vs Sample Values',
+      title: 'Bacteria Cultures Per Sample',
       showlegend: false,
       xaxis: { title: 'OTU ID' },
-      yaxis: { title: 'Sample Values' }
+      yaxis: { title: 'Number of Bacteria' }
     };
 
     // Render the Bubble Chart
@@ -74,8 +74,8 @@ function buildCharts(sample) {
     };
 
     const barLayout = {
-      title: 'Top 10 OTUs Found',
-      xaxis: { title: 'Sample Values' },
+      title: 'Top 10 Bacteria Cultures Found',
+      xaxis: { title: 'Number of Bacteria' },
       yaxis: { title: 'OTU IDs' }
     };
 
