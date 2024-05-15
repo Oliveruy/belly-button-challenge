@@ -1,7 +1,6 @@
 // Build the metadata panel
 function buildMetadata(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
-
     // get the metadata field
     const metadata = data.metadata;
 
@@ -15,32 +14,27 @@ function buildMetadata(sample) {
     // Use `.html("") to clear any existing metadata
     panel.html("");
 
-
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
     Object.entries(result).forEach(([key, value]) => {
-      panel.append("h6").text(`${key.toUpperCase()}: ${value}`)
-
+      panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
+    });
   });
 }
 
 // function to build both charts
 function buildCharts(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
-
     // Get the samples field
     const samples = data.samples;
 
-
     // Filter the samples for the object with the desired sample number
     const sampleData = samples.filter(d => d.id === sample)[0];
-
 
     // Get the otu_ids, otu_labels, and sample_values
     const otuIds = sampleData.otu_ids;
     const otuLabels = sampleData.otu_labels;
     const sampleValues = sampleData.sample_values;
-
 
     // Build a Bubble Chart
     const bubbleTrace = {
@@ -49,18 +43,18 @@ function buildCharts(sample) {
       text: otuLabels,
       mode: 'markers',
       marker: {
-          size: sampleValues,
-          color: otuIds,
-          colorscale: 'Earth'
+        size: sampleValues,
+        color: otuIds,
+        colorscale: 'Earth'
       }
-  };
+    };
 
-  const bubbleLayout = {
-    title: 'OTU ID vs Sample Values',
-    showlegend: false,
-    xaxis: { title: 'OTU ID' },
-    yaxis: { title: 'Sample Values' }
-  };
+    const bubbleLayout = {
+      title: 'OTU ID vs Sample Values',
+      showlegend: false,
+      xaxis: { title: 'OTU ID' },
+      yaxis: { title: 'Sample Values' }
+    };
 
     // Render the Bubble Chart
     Plotly.newPlot('bubble', [bubbleTrace], bubbleLayout);
@@ -72,11 +66,11 @@ function buildCharts(sample) {
 
     // Build a Bar Chart
     const barTrace = {
-        x: topSampleValues,
-        y: yticks,
-        text: topOtuLabels,
-        type: 'bar',
-        orientation: 'h'
+      x: topSampleValues,
+      y: yticks,
+      text: topOtuLabels,
+      type: 'bar',
+      orientation: 'h'
     };
 
     const barLayout = {
@@ -93,7 +87,6 @@ function buildCharts(sample) {
 // Function to run on page load
 function init() {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
-
     // Get the names field
     const names = data.names;
 
@@ -107,15 +100,12 @@ function init() {
       dropdown.append("option").text(name).attr("value", name);
     });
 
-
     // Get the first sample from the list
     const firstSample = names[0];
-
 
     // Build charts and metadata panel with the first sample
     buildCharts(firstSample);
     buildMetadata(firstSample);
-
   });
 }
 
